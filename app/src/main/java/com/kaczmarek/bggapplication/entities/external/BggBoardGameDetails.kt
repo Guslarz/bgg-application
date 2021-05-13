@@ -1,10 +1,11 @@
 package com.kaczmarek.bggapplication.entities.external
 
-data class BoardGameDetails(
+data class BggBoardGameDetails(
+    val title: String,
     val type: String,
-    val originalTitle: String,
-    val yearPublished: Int,
+    val thumbnail: String?,
     val designers: List<String>,
     val artists: List<String>,
-    val description: String
+    val description: String,
+    val rank: Long?
 )
