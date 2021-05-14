@@ -5,9 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class BoardGame(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val title: String,
     val originalTitle: String,
-    val publicationDate: Int,
-    val description: String
+    val yearPublished: Int,
+    val description: String,
+    val thumbnail: String?,
+    val comment: String?
 )

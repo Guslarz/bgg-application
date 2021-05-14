@@ -24,6 +24,7 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
         private const val NAME_ATTR = "name"
         private const val RANK_NAME_EXPECTED = "boardgame"
         private const val NOT_RANKED_VALUE = "Not Ranked"
+        private const val COMMENT_TAG = "comment"
     }
 
     override fun parse(inputStream: InputStream): List<BggBoardGameCollectionItem> {
@@ -61,6 +62,7 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
         var title: String? = null
         var year: Int? = null
         var rank: Long? = null
+        var comment: String? = null
 
         while (parser.next() != XmlPullParser.END_TAG || parser.name != ITEM_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
@@ -71,11 +73,12 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
                 TITLE_TAG -> title = readTitle(parser)
                 YEAR_TAG -> year = readYear(parser)
                 STATISTICS_TAG -> rank = readRankFromStatistics(parser)
+                COMMENT_TAG -> comment = readComment(parser)
                 else -> skip(parser)
             }
         }
         parser.require(XmlPullParser.END_TAG, NS, ITEM_TAG)
-        return BggBoardGameCollectionItem(id, title!!, year!!, rank)
+        return BggBoardGameCollectionItem(id, title!!, year!!, rank, comment)
     }
 
     private fun readId(parser: XmlPullParser): Long {
@@ -134,4 +137,6 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
         parser.require(XmlPullParser.END_TAG, NS, RANKS_TAG)
         return null
     }
+
+    private fun readComment(parser: XmlPullParser) = readText(parser, NS, COMMENT_TAG)
 }

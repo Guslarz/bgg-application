@@ -2,16 +2,19 @@ package com.kaczmarek.bggapplication.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.kaczmarek.bggapplication.databinding.ActivityMainBinding
 import com.kaczmarek.bggapplication.entities.external.BggApiResponse
 import com.kaczmarek.bggapplication.logic.bggapi.BggApiDao
+import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var database: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,5 +53,8 @@ class MainActivity : AppCompatActivity() {
                 binding.textView3.text = response3.exception.toString()
             }
         }
+
+        database = AppDatabase.getInstance(this)
+        Toast.makeText(this, "ASDF", Toast.LENGTH_SHORT).show()
     }
 }
