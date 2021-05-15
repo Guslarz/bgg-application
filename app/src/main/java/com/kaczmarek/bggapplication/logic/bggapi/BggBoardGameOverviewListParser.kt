@@ -1,7 +1,7 @@
 package com.kaczmarek.bggapplication.logic.bggapi
 
 import android.util.Xml
-import com.kaczmarek.bggapplication.entities.external.BggBoardGameOverview
+import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameOverview
 import org.xmlpull.v1.XmlPullParser
 import java.io.InputStream
 

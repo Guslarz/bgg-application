@@ -1,11 +1,11 @@
-package com.kaczmarek.bggapplication.entities.internal
+package com.kaczmarek.bggapplication.entities.database
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity(
-    primaryKeys = ["boardGameId", "date"],
+    primaryKeys = ["boardGameId", "datetime"],
     foreignKeys = [
         ForeignKey(
             entity = BoardGame::class,
@@ -17,6 +17,6 @@ import java.time.LocalDate
 )
 data class Rank(
     val boardGameId: Long,
-    val date: LocalDate,
+    val datetime: LocalDateTime,
     val value: Long
 )

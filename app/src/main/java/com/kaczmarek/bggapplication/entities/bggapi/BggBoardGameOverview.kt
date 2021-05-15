@@ -1,4 +1,4 @@
-package com.kaczmarek.bggapplication.entities.external
+package com.kaczmarek.bggapplication.entities.bggapi
 
 data class BggBoardGameOverview(
     val id: Long,

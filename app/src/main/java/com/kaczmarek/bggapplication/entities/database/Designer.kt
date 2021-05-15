@@ -1,4 +1,4 @@
-package com.kaczmarek.bggapplication.entities.internal
+package com.kaczmarek.bggapplication.entities.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,10 +1,9 @@
 package com.kaczmarek.bggapplication.logic.database
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
-import com.kaczmarek.bggapplication.entities.internal.BoardGameDetails
-import com.kaczmarek.bggapplication.entities.internal.BoardGameOverview
+import androidx.room.*
+import com.kaczmarek.bggapplication.entities.database.BoardGame
+import com.kaczmarek.bggapplication.entities.database.BoardGameDetails
+import com.kaczmarek.bggapplication.entities.database.BoardGameOverview
 
 @Dao
 interface BoardGameDao {
@@ -24,4 +23,13 @@ interface BoardGameDao {
     @Transaction
     @Query("SELECT * FROM BoardGame WHERE id = :id")
     suspend fun getBoardGameDetails(id: Long): BoardGameDetails
+
+    @Insert
+    suspend fun addBoardGame(boardGame: BoardGame)
+
+    @Update
+    suspend fun updateBoardGame(boardGame: BoardGame)
+
+    @Delete
+    suspend fun deleteBoardGame(boardGame: BoardGame)
 }

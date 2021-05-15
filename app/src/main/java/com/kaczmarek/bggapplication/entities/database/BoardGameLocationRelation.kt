@@ -1,11 +1,11 @@
-package com.kaczmarek.bggapplication.entities.internal
+package com.kaczmarek.bggapplication.entities.database
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import androidx.room.PrimaryKey
 
 @Entity(
-    primaryKeys = ["boardGameId", "designerId"],
     foreignKeys = [
         ForeignKey(
             entity = BoardGame::class,
@@ -14,15 +14,16 @@ import androidx.room.Index
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = Designer::class,
+            entity = Location::class,
             parentColumns = ["id"],
-            childColumns = ["designerId"],
+            childColumns = ["locationId"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index("designerId")]
+    indices = [Index("locationId")]
 )
-data class BoardGamesDesignersRelation(
-    val boardGameId: Long,
-    val designerId: Long
+data class BoardGameLocationRelation(
+    @PrimaryKey val boardGameId: Long,
+    val locationId: Long,
+    val comment: String?
 )

@@ -1,4 +1,4 @@
-package com.kaczmarek.bggapplication.entities.external
+package com.kaczmarek.bggapplication.entities.bggapi
 
 data class BggBoardGameDetails(
     val title: String,

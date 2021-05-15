@@ -1,9 +1,9 @@
 package com.kaczmarek.bggapplication.logic.bggapi
 
-import com.kaczmarek.bggapplication.entities.external.BggApiResponse
-import com.kaczmarek.bggapplication.entities.external.BggBoardGameCollectionItem
-import com.kaczmarek.bggapplication.entities.external.BggBoardGameDetails
-import com.kaczmarek.bggapplication.entities.external.BggBoardGameOverview
+import com.kaczmarek.bggapplication.entities.bggapi.BggApiResponse
+import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameCollectionItem
+import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameDetails
+import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameOverview
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

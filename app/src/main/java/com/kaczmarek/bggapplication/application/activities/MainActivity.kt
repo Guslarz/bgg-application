@@ -1,26 +1,36 @@
-package com.kaczmarek.bggapplication.activities
+package com.kaczmarek.bggapplication.application.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.kaczmarek.bggapplication.application.BggApplication
+import com.kaczmarek.bggapplication.application.viewmodels.BggViewModelFactory
+import com.kaczmarek.bggapplication.application.viewmodels.BoardGameOverviewListViewModel
 import com.kaczmarek.bggapplication.databinding.ActivityMainBinding
-import com.kaczmarek.bggapplication.entities.external.BggApiResponse
-import com.kaczmarek.bggapplication.logic.bggapi.BggApiDao
-import com.kaczmarek.bggapplication.logic.database.AppDatabase
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import com.kaczmarek.bggapplication.entities.BoardGameOverviewOrder
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var database: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val viewModel: BoardGameOverviewListViewModel by viewModels {
+            BggViewModelFactory((application as BggApplication).database)
+        }
+
+        viewModel.getIsLoading().observe(this) { value ->
+            binding.textView.text = if (value) "Loading..." else "Loaded"
+        }
+        viewModel.getBoardGameOverviewList(BoardGameOverviewOrder.RANK_ASC)
+            .observe(this) { list ->
+                binding.textView.text = list.size.toString()
+        }
+
+        /*
         val bggApiDao = BggApiDao()
         lifecycleScope.launch{
             binding.textView.text = "Loading..."
@@ -53,8 +63,6 @@ class MainActivity : AppCompatActivity() {
                 binding.textView3.text = response3.exception.toString()
             }
         }
-
-        database = AppDatabase.getInstance(this)
-        Toast.makeText(this, "ASDF", Toast.LENGTH_SHORT).show()
+         */
     }
 }

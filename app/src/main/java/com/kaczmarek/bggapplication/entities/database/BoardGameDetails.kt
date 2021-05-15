@@ -1,4 +1,4 @@
-package com.kaczmarek.bggapplication.entities.internal
+package com.kaczmarek.bggapplication.entities.database
 
 import androidx.room.Embedded
 import androidx.room.Junction
@@ -28,7 +28,12 @@ data class BoardGameDetails(
     val artists: List<Artist>,
     @Relation(
         parentColumn = "id",
-        entityColumn = "boardGameId"
+        entityColumn = "id"
     )
-    val ranks: List<Rank>
+    val ranks: BoardGameNewestRankView,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "id"
+    )
+    val location: BoardGameLocationView
 )
