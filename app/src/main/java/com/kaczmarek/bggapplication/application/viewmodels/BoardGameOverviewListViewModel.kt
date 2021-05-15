@@ -9,7 +9,7 @@ import com.kaczmarek.bggapplication.entities.database.BoardGameOverview
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
 
-class BoardGameOverviewListViewModel(private val database: AppDatabase) : ViewModel() {
+class BoardGameOverviewListViewModel(database: AppDatabase) : BggViewModel(database) {
 
     private val boardGameOverviewList = MutableLiveData<List<BoardGameOverview>>()
     private var lastOrder: BoardGameOverviewOrder? = null

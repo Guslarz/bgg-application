@@ -35,5 +35,5 @@ data class BoardGameDetails(
         parentColumn = "id",
         entityColumn = "id"
     )
-    val location: BoardGameLocationView
+    val location: BoardGameLocationView?
 )

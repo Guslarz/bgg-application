@@ -9,12 +9,12 @@ import com.kaczmarek.bggapplication.entities.database.*
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
 
-abstract class BoardGameDetailsViewModel(private val database: AppDatabase) : ViewModel() {
+abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(database) {
 
-    private val boardGame = MutableLiveData<BoardGame>()
-    private val artists = MutableLiveData<List<Artist>>()
-    private val designers = MutableLiveData<List<Designer>>()
-    private val locationRelation = MutableLiveData<BoardGameLocationRelation>()
+    protected val boardGame = MutableLiveData<BoardGame>()
+    protected val artists = MutableLiveData<List<Artist>>()
+    protected val designers = MutableLiveData<List<Designer>>()
+    protected val locationRelation = MutableLiveData<BoardGameLocationRelation>()
     private val availableArtists: MutableLiveData<List<Artist>> by lazy {
         MutableLiveData<List<Artist>>().also { loadAvailableArtists() }
     }
@@ -26,8 +26,10 @@ abstract class BoardGameDetailsViewModel(private val database: AppDatabase) : Vi
     }
     private var queries = mutableListOf<() -> Unit>()
 
-    protected abstract fun persistBoardGame(boardGame: BoardGame)
-    protected abstract fun persistLocationRelation(locationRelation: BoardGameLocationRelation)
+    protected abstract suspend fun persistBoardGame(boardGame: BoardGame)
+    protected abstract suspend fun persistLocationRelation(
+        locationRelation: BoardGameLocationRelation
+    )
 
     fun getBoardGame(): LiveData<BoardGame> = boardGame
     fun getDesigners(): LiveData<List<Designer>> = designers

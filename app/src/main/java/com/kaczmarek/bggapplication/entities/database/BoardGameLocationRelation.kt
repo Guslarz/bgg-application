@@ -23,7 +23,20 @@ import androidx.room.PrimaryKey
     indices = [Index("locationId")]
 )
 data class BoardGameLocationRelation(
-    @PrimaryKey val boardGameId: Long,
-    val locationId: Long?,
-    val comment: String?
-)
+    @PrimaryKey var boardGameId: Long,
+    var locationId: Long?,
+    var comment: String
+) {
+
+    companion object {
+        private val DEFAULT_LOCATION_ID = null
+        private const val DEFAULT_COMMENT = ""
+    }
+
+    constructor(boardGameId: Long) :
+            this(
+                boardGameId = boardGameId,
+                locationId = DEFAULT_LOCATION_ID,
+                comment = DEFAULT_COMMENT
+            )
+}

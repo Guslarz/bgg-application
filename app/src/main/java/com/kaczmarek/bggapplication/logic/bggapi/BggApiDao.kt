@@ -12,7 +12,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class BggApiDao(
-    private val dispatcher: CoroutineDispatcher = Dispatchers.Default
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
     companion object {

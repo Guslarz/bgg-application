@@ -15,5 +15,5 @@ import androidx.room.Embedded
 data class BoardGameLocationView(
     val id: Long,
     @Embedded(prefix = "location_") val location: Location,
-    val comment: String?
+    val comment: String
 )

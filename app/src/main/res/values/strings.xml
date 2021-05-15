@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BggApplication</string>
+    <string name="err_bgg_api_request_failed">Request failed</string>
 </resources>
