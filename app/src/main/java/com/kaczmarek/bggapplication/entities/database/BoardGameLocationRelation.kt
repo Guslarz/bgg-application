@@ -24,6 +24,6 @@ import androidx.room.PrimaryKey
 )
 data class BoardGameLocationRelation(
     @PrimaryKey val boardGameId: Long,
-    val locationId: Long,
+    val locationId: Long?,
     val comment: String?
 )

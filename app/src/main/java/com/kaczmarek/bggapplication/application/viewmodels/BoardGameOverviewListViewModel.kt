@@ -7,16 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.kaczmarek.bggapplication.entities.BoardGameOverviewOrder
 import com.kaczmarek.bggapplication.entities.database.BoardGameOverview
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class BoardGameOverviewListViewModel(private val database: AppDatabase) : ViewModel() {
 
-    private val isLoading = MutableLiveData<Boolean>().apply { setValue(false) }
     private val boardGameOverviewList = MutableLiveData<List<BoardGameOverview>>()
     private var lastOrder: BoardGameOverviewOrder? = null
-
-    fun getIsLoading(): LiveData<Boolean> = isLoading
 
     fun getBoardGameOverviewList(order: BoardGameOverviewOrder):
             LiveData<List<BoardGameOverview>> {
@@ -27,12 +23,18 @@ class BoardGameOverviewListViewModel(private val database: AppDatabase) : ViewMo
         return boardGameOverviewList
     }
 
+    fun deleteBoardGame(id: Long) {
+        viewModelScope.launch {
+            database.boardGameDao().deleteBoardGameById(id)
+            loadBoardGameOverviewList(lastOrder!!)
+        }
+    }
+
     private fun loadBoardGameOverviewList(order: BoardGameOverviewOrder) {
         lastOrder = order
         viewModelScope.launch {
             boardGameOverviewList.postValue(listOf())
-            isLoading.postValue(true)
-            /*
+
             val dao = database.boardGameDao()
             val list = when (order) {
                 BoardGameOverviewOrder.RANK_ASC -> dao.getBoardGameOverviewsRankAsc()
@@ -41,10 +43,7 @@ class BoardGameOverviewListViewModel(private val database: AppDatabase) : ViewMo
                 BoardGameOverviewOrder.YEAR_DESC -> dao.getBoardGameOverviewsYearDesc()
             }
 
-            boardGameOverviewList.postValue(list)*/
-            delay(500)
-            boardGameOverviewList.postValue(listOf())
-            isLoading.postValue(false)
+            boardGameOverviewList.postValue(list)
         }
     }
 }

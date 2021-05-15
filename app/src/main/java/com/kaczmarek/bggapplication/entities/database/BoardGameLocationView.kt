@@ -1,9 +1,11 @@
 package com.kaczmarek.bggapplication.entities.database
 
 import androidx.room.DatabaseView
+import androidx.room.Embedded
 
 @DatabaseView(
-    "SELECT BoardGame.id, Location.name, BoardGameLocationRelation.comment " +
+    "SELECT BoardGame.id, Location.id AS location_id, " +
+            "Location.name AS location_name, BoardGameLocationRelation.comment " +
             "FROM BoardGame " +
             "INNER JOIN BoardGameLocationRelation " +
             "ON BoardGame.id = boardGameId " +
@@ -12,6 +14,6 @@ import androidx.room.DatabaseView
 )
 data class BoardGameLocationView(
     val id: Long,
-    val name: String,
+    @Embedded(prefix = "location_") val location: Location,
     val comment: String?
 )

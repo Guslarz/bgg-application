@@ -22,9 +22,6 @@ class MainActivity : AppCompatActivity() {
             BggViewModelFactory((application as BggApplication).database)
         }
 
-        viewModel.getIsLoading().observe(this) { value ->
-            binding.textView.text = if (value) "Loading..." else "Loaded"
-        }
         viewModel.getBoardGameOverviewList(BoardGameOverviewOrder.RANK_ASC)
             .observe(this) { list ->
                 binding.textView.text = list.size.toString()

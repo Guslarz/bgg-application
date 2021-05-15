@@ -45,4 +45,10 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun locationDao(): LocationDao
 
     abstract fun rankDao(): RankDao
+
+    abstract fun boardGamesArtistsRelationDao(): BoardGamesArtistsRelationDao
+
+    abstract fun boardGamesDesignersRelationDao(): BoardGamesDesignersRelationDao
+
+    abstract fun boardGameLocationRelationDao(): BoardGameLocationRelationDao
 }

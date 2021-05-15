@@ -25,11 +25,11 @@ interface BoardGameDao {
     suspend fun getBoardGameDetails(id: Long): BoardGameDetails
 
     @Insert
-    suspend fun addBoardGame(boardGame: BoardGame)
+    suspend fun addBoardGame(boardGame: BoardGame): Long
 
     @Update
     suspend fun updateBoardGame(boardGame: BoardGame)
 
-    @Delete
-    suspend fun deleteBoardGame(boardGame: BoardGame)
+    @Query("DELETE FROM BoardGame WHERE id = :id")
+    suspend fun deleteBoardGameById(id: Long)
 }
