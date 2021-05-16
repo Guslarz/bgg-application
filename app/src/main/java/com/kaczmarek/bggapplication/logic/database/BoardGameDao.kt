@@ -30,6 +30,9 @@ interface BoardGameDao {
     @Query("SELECT id FROM BoardGame WHERE id NOT IN (:ids)")
     suspend fun getIdsExcept(ids: List<Long>): List<Long>
 
+    @Query("SELECT * FROM BoardGameOverview WHERE id = :id")
+    suspend fun getOverviewById(id: Long): BoardGameOverview
+
     @Query("SELECT * FROM BoardGameOverview WHERE id IN (:ids)")
     suspend fun getOverviewsByIds(ids: List<Long>): List<BoardGameOverview>
 

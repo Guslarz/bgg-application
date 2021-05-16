@@ -13,7 +13,7 @@ import com.kaczmarek.bggapplication.entities.database.*
         BoardGamesArtistsRelation::class, BoardGamesDesignersRelation::class,
         BoardGameLocationRelation::class],
     views = [BoardGameNewestRankView::class, BoardGameLocationView::class,
-        BoardGameOverview::class],
+        BoardGameOverview::class, LocationWithBoardGameCount::class],
     version = 1,
     exportSchema = false
 )

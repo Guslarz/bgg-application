@@ -24,6 +24,7 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
     private val availableLocations: MutableLiveData<List<Location>> by lazy {
         MutableLiveData<List<Location>>().also { loadAvailableLocations() }
     }
+    @Volatile
     private var queries = mutableListOf<() -> Unit>()
 
     protected abstract suspend fun persistBoardGame(boardGame: BoardGame)
@@ -41,12 +42,16 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
 
     fun commit() {
         viewModelScope.launch {
+            if (locationRelation.value!!.locationId == null)
+                locationRelation.value!!.comment = ""
+
             database.withTransaction {
                 persistBoardGame(boardGame.value!!)
                 persistLocationRelation(locationRelation.value!!)
                 for (query in queries)
                     query()
             }
+            queries = mutableListOf()
         }
     }
 

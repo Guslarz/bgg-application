@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">BggApplication</string>
     <string name="err_bgg_api_request_failed">Request failed</string>
+    <string name="thumbnail_description">Board game thumbnail</string>
+    <string name="delete_button_desctiption">Delete</string>
+    <string name="board_game_overview_header_rank">Rank</string>
+    <string name="board_game_overview_header_thumbnail">Image</string>
+    <string name="board_game_overview_header_content">Game</string>
+    <string name="board_game_overview_header_delete">Delete</string>
+    <string name="add_board_game">Add new board game</string>
+    <string name="board_game_overview_title_and_year_template">%s (%d)</string>
 </resources>
