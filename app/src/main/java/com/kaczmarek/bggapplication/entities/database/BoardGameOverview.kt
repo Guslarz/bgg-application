@@ -4,7 +4,7 @@ import androidx.room.DatabaseView
 
 @DatabaseView(
     "SELECT BoardGame.id, BoardGame.title, BoardGame.yearPublished, " +
-            "BoardGame.thumbnail, BoardGame.description, BoardGameNewestRankView.rank " +
+            "BoardGame.thumbnail, BoardGameNewestRankView.rank " +
             "FROM BoardGame " +
             "JOIN BoardGameNewestRankView " +
             "USING(id)"
@@ -14,6 +14,5 @@ data class BoardGameOverview(
     val title: String,
     val yearPublished: Int,
     val thumbnail: String?,
-    val description: String,
     val rank: Long?
 )

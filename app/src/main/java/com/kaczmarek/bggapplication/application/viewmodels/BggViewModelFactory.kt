@@ -23,6 +23,22 @@ class BggViewModelFactory(private val database: AppDatabase) : ViewModelProvider
                 @Suppress("UNCHECKED_CAST")
                 return BggBoardGameSearchViewModel(database) as T
             }
+            modelClass.isAssignableFrom(BggUserCollectionViewModel::class.java) -> {
+                @Suppress("UNCHECKED_CAST")
+                return BggUserCollectionViewModel(database) as T
+            }
+            modelClass.isAssignableFrom(BoardGameRankingViewModel::class.java) -> {
+                @Suppress("UNCHECKED_CAST")
+                return BoardGameRankingViewModel(database) as T
+            }
+            modelClass.isAssignableFrom(LocationListViewModel::class.java) -> {
+                @Suppress("UNCHECKED_CAST")
+                return LocationListViewModel(database) as T
+            }
+            modelClass.isAssignableFrom(LocationUpdateViewModel::class.java) -> {
+                @Suppress("UNCHECKED_CAST")
+                return LocationUpdateViewModel(database) as T
+            }
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

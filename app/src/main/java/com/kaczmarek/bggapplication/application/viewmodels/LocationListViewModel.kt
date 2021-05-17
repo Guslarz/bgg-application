@@ -1,8 +1,10 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.kaczmarek.bggapplication.R
 import com.kaczmarek.bggapplication.entities.database.Location
 import com.kaczmarek.bggapplication.entities.database.LocationWithBoardGameCount
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
@@ -18,16 +20,28 @@ class LocationListViewModel(database: AppDatabase) : BggViewModel(database) {
 
     fun addLocation(location: Location) {
         viewModelScope.launch {
-            database.locationDao().addLocation(location)
-            loadLocationList()
+            try {
+                location.id = database.locationDao().addLocation(location)
+                locationList.postValue(
+                    locationList.value!!.plusElement(
+                        LocationWithBoardGameCount(location, 0)
+                    )
+                )
+            } catch (e: SQLiteConstraintException) {
+                setErrorMessage(R.string.err_location_name_duplicate)
+            }
         }
     }
 
-    fun removeLocation(location: Location) {
+    fun removeLocation(location: LocationWithBoardGameCount) {
         viewModelScope.launch {
-            database.locationDao().deleteLocation(location)
-            loadLocationList()
+            database.locationDao().deleteLocation(location.location)
+            locationList.postValue(locationList.value!!.minusElement(location))
         }
+    }
+
+    fun refresh() {
+        loadLocationList()
     }
 
     private fun loadLocationList() {

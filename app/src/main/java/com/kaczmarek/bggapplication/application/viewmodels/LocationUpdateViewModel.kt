@@ -1,34 +1,46 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
+import android.database.sqlite.SQLiteConstraintException
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.withTransaction
-import com.kaczmarek.bggapplication.entities.database.LocationWithBoardGameOverviews
+import com.kaczmarek.bggapplication.R
+import com.kaczmarek.bggapplication.entities.database.Location
+import com.kaczmarek.bggapplication.entities.database.LocationBoardGameOverview
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
 
 class LocationUpdateViewModel(database: AppDatabase) : BggViewModel(database) {
 
-    private val location = MutableLiveData<LocationWithBoardGameOverviews>()
+    private lateinit var location: Location
+    private val locationBoardGames = MutableLiveData<List<LocationBoardGameOverview>>()
 
-    fun getLocation(): LiveData<LocationWithBoardGameOverviews> = location
+    fun getLocation(): Location = location
+    fun getLocationBoardGames(): LiveData<List<LocationBoardGameOverview>> = locationBoardGames
 
-    fun loadTarget(id: Long) {
+    fun loadTarget(target: Location) {
+        location = target
         viewModelScope.launch {
-            loadLocation(id)
+            loadLocationBoardGames(location.id)
         }
     }
 
-    fun commit() {
+    fun commit(callback: () -> Unit) {
         viewModelScope.launch {
             database.withTransaction {
-                database.locationDao().updateLocation(location.value!!.location)
+                try {
+                    database.locationDao().updateLocation(location)
+                    callback()
+                } catch (e: SQLiteConstraintException) {
+                    setErrorMessage(R.string.err_invalid_value)
+                }
             }
         }
     }
 
-    private suspend fun loadLocation(id: Long) {
-        location.postValue(database.locationDao().getLocationWithBoardGames(id))
+    private suspend fun loadLocationBoardGames(id: Long) {
+        locationBoardGames.postValue(database.locationDao().getLocationBoardGames(id))
     }
 }

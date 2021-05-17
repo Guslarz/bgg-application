@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BggApplication">
-        <activity android:name="com.kaczmarek.bggapplication.application.activities.MainActivity">
+        <activity android:name=".application.activities.LocationDetailsActivity"></activity>
+        <activity android:name=".application.activities.LocationListActivity" />
+        <activity android:name=".application.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

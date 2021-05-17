@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".application.activities.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/order_by" />
+
+        <Spinner
+            android:id="@+id/spinnerOrderBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:spinnerMode="dialog" />
+
+    </LinearLayout>
+
     <TableRow
         android:id="@+id/tableRow"
         android:layout_width="match_parent"
@@ -14,7 +38,7 @@
         android:layout_marginEnd="@dimen/board_game_overview_horizontal_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
 
         <TextView
             android:id="@+id/textViewHeaderRank"
@@ -50,6 +74,7 @@
     </TableRow>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/board_game_overview_horizontal_margin"
@@ -70,6 +95,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_board_game"
+        app:layout_constraintBottom_toTopOf="@id/buttonUserCollection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonUserCollection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/user_collection"
+        app:layout_constraintBottom_toTopOf="@id/buttonLocations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonLocations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/locations"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -17,29 +17,17 @@
         android:layout_weight="@dimen/board_game_overview_thumbnail_weight"
         android:contentDescription="@string/thumbnail_description" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textViewContent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="@dimen/board_game_overview_content_weight"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textViewContentTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textViewContentDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
     <ImageButton
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="@dimen/board_game_overview_rank_weight"
-        android:contentDescription="@string/delete_button_desctiption"
+        android:contentDescription="@string/delete_button_description"
         android:src="@android:drawable/ic_menu_delete" />
 
 </LinearLayout>

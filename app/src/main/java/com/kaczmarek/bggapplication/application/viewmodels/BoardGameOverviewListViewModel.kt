@@ -2,7 +2,6 @@ package com.kaczmarek.bggapplication.application.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaczmarek.bggapplication.entities.BoardGameOverviewOrder
 import com.kaczmarek.bggapplication.entities.database.BoardGameOverview
@@ -14,27 +13,11 @@ class BoardGameOverviewListViewModel(database: AppDatabase) : BggViewModel(datab
     private val boardGameOverviewList = MutableLiveData<List<BoardGameOverview>>()
     private var lastOrder: BoardGameOverviewOrder? = null
 
-    fun getBoardGameOverviewList(order: BoardGameOverviewOrder):
-            LiveData<List<BoardGameOverview>> {
+    fun getBoardGameOverviewList(): LiveData<List<BoardGameOverview>> = boardGameOverviewList
 
-        if (lastOrder != order) {
-            loadBoardGameOverviewList(order)
-        }
-        return boardGameOverviewList
-    }
-
-    fun deleteBoardGame(id: Long) {
-        viewModelScope.launch {
-            database.boardGameDao().deleteBoardGameById(id)
-            loadBoardGameOverviewList(lastOrder!!)
-        }
-    }
-
-    private fun loadBoardGameOverviewList(order: BoardGameOverviewOrder) {
+    fun loadBoardGameOverviewList(order: BoardGameOverviewOrder) {
         lastOrder = order
         viewModelScope.launch {
-            boardGameOverviewList.postValue(listOf())
-
             val dao = database.boardGameDao()
             val list = when (order) {
                 BoardGameOverviewOrder.RANK_ASC -> dao.getBoardGameOverviewsRankAsc()
@@ -44,6 +27,19 @@ class BoardGameOverviewListViewModel(database: AppDatabase) : BggViewModel(datab
             }
 
             boardGameOverviewList.postValue(list)
+        }
+    }
+
+    fun reloadBoardGameOverviewList() {
+        loadBoardGameOverviewList(lastOrder!!)
+    }
+
+    fun deleteBoardGame(boardGameOverview: BoardGameOverview) {
+        viewModelScope.launch {
+            database.boardGameDao().deleteBoardGameById(boardGameOverview.id)
+            boardGameOverviewList.postValue(
+                boardGameOverviewList.value!!.minusElement(boardGameOverview)
+            )
         }
     }
 }

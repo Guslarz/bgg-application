@@ -25,7 +25,7 @@ import androidx.room.PrimaryKey
 data class BoardGameLocationRelation(
     @PrimaryKey var boardGameId: Long,
     var locationId: Long?,
-    var comment: String
+    var comment: String?
 ) {
 
     companion object {

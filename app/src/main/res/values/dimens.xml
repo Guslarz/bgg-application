@@ -5,4 +5,6 @@
     <dimen name="board_game_overview_content_weight">1</dimen>
     <dimen name="board_game_overview_delete_weight">1</dimen>
     <dimen name="board_game_overview_horizontal_margin">16dp</dimen>
+    <dimen name="location_row_horizontal_padding">16dp</dimen>
+    <dimen name="location_row_vertical_padding">4dp</dimen>
 </resources>

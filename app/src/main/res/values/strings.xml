@@ -2,11 +2,25 @@
     <string name="app_name">BggApplication</string>
     <string name="err_bgg_api_request_failed">Request failed</string>
     <string name="thumbnail_description">Board game thumbnail</string>
-    <string name="delete_button_desctiption">Delete</string>
+    <string name="delete_button_description">Delete</string>
     <string name="board_game_overview_header_rank">Rank</string>
     <string name="board_game_overview_header_thumbnail">Image</string>
     <string name="board_game_overview_header_content">Game</string>
     <string name="board_game_overview_header_delete">Delete</string>
     <string name="add_board_game">Add new board game</string>
-    <string name="board_game_overview_title_and_year_template">%s (%d)</string>
+    <string name="board_game_title_and_year_template">%s (%d)</string>
+    <string name="order_by">Order by</string>
+    <string name="rank_asc">Rank ASC</string>
+    <string name="rank_desc">Rank DESC</string>
+    <string name="year_asc">Year ASC</string>
+    <string name="year_desc">Year DESC</string>
+    <string name="locations">Locations</string>
+    <string name="user_collection">User collection</string>
+    <string name="location_board_game_count_template">Board games: %d</string>
+    <string name="add_location">Add location</string>
+    <string name="err_location_name_duplicate">Location with this name already exists</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="name_label">Name:</string>
+    <string name="err_invalid_value">Invalid value</string>
 </resources>
