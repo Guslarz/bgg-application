@@ -12,7 +12,7 @@ import com.kaczmarek.bggapplication.entities.database.*
         Artist::class, BoardGame::class, Designer::class, Rank::class, Location::class,
         BoardGamesArtistsRelation::class, BoardGamesDesignersRelation::class,
         BoardGameLocationRelation::class],
-    views = [BoardGameNewestRankView::class, BoardGameLocationView::class,
+    views = [NewestRankView::class, BoardGameLocationView::class,
         BoardGameOverview::class, LocationWithBoardGameCount::class],
     version = 1,
     exportSchema = false

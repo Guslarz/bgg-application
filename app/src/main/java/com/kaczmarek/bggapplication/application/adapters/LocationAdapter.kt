@@ -1,16 +1,10 @@
 package com.kaczmarek.bggapplication.application.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kaczmarek.bggapplication.R
 import com.kaczmarek.bggapplication.databinding.LocationRowBinding
-import com.kaczmarek.bggapplication.entities.database.Location
 import com.kaczmarek.bggapplication.entities.database.LocationWithBoardGameCount
 
 class LocationAdapter(private val locations: List<LocationWithBoardGameCount>) :

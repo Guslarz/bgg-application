@@ -79,7 +79,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onAddClick() {
-
+        val intent = Intent(this, ImportGameActivity::class.java)
+        startActivity(intent)
     }
 
     private fun onUserCollectionClick() {

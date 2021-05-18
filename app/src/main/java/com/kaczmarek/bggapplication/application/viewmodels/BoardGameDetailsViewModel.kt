@@ -1,10 +1,11 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.withTransaction
+import com.kaczmarek.bggapplication.R
 import com.kaczmarek.bggapplication.entities.database.*
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
@@ -15,15 +16,9 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
     protected val artists = MutableLiveData<List<Artist>>()
     protected val designers = MutableLiveData<List<Designer>>()
     protected val locationRelation = MutableLiveData<BoardGameLocationRelation>()
-    private val availableArtists: MutableLiveData<List<Artist>> by lazy {
-        MutableLiveData<List<Artist>>().also { loadAvailableArtists() }
-    }
-    private val availableDesigners: MutableLiveData<List<Designer>> by lazy {
-        MutableLiveData<List<Designer>>().also { loadAvailableDesigners() }
-    }
-    private val availableLocations: MutableLiveData<List<Location>> by lazy {
-        MutableLiveData<List<Location>>().also { loadAvailableLocations() }
-    }
+    private val availableArtists = MutableLiveData<List<Artist>>()
+    private val availableDesigners = MutableLiveData<List<Designer>>()
+    private val availableLocations = MutableLiveData<List<Location>>()
     @Volatile
     private var queries = mutableListOf<() -> Unit>()
 
@@ -40,16 +35,22 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
     fun getAvailableDesigners(): LiveData<List<Designer>> = availableDesigners
     fun getAvailableLocations(): LiveData<List<Location>> = availableLocations
 
-    fun commit() {
+    fun commit(callback: () -> Unit) {
+        val locationRelationValue = locationRelation.value!!
         viewModelScope.launch {
-            if (locationRelation.value!!.locationId == null)
-                locationRelation.value!!.comment = ""
+            if (locationRelationValue.locationId == null)
+                locationRelationValue.comment = ""
 
             database.withTransaction {
-                persistBoardGame(boardGame.value!!)
-                persistLocationRelation(locationRelation.value!!)
-                for (query in queries)
-                    query()
+                try {
+                    persistBoardGame(boardGame.value!!)
+                    persistLocationRelation(locationRelationValue)
+                    for (query in queries)
+                        query()
+                    callback()
+                } catch (e: SQLiteConstraintException) {
+                    setErrorMessage(R.string.err_invalid_value)
+                }
             }
             queries = mutableListOf()
         }
@@ -102,22 +103,24 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
             )
         }
     }
-
-    private fun loadAvailableArtists() {
+    
+    fun loadAvailable() {
         viewModelScope.launch {
-            availableArtists.postValue(database.artistDao().getAllArtists())
+            loadAvailableArtists()
+            loadAvailableDesigners()
+            loadAvailableLocations()
         }
     }
 
-    private fun loadAvailableDesigners() {
-        viewModelScope.launch {
-            availableDesigners.postValue(database.designerDao().getAllDesigners())
-        }
+    private suspend fun loadAvailableArtists() {
+        availableArtists.postValue(database.artistDao().getAllArtists())
     }
 
-    private fun loadAvailableLocations() {
-        viewModelScope.launch {
-            availableLocations.postValue(database.locationDao().getAllLocations())
-        }
+    private suspend fun loadAvailableDesigners() {
+        availableDesigners.postValue(database.designerDao().getAllDesigners())
+    }
+
+    private suspend fun loadAvailableLocations() {
+        availableLocations.postValue(database.locationDao().getAllLocations())
     }
 }

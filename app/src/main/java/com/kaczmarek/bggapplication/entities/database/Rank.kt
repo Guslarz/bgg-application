@@ -5,18 +5,10 @@ import androidx.room.ForeignKey
 import java.time.LocalDateTime
 
 @Entity(
-    primaryKeys = ["boardGameId", "datetime"],
-    foreignKeys = [
-        ForeignKey(
-            entity = BoardGame::class,
-            parentColumns = ["id"],
-            childColumns = ["boardGameId"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
+    primaryKeys = ["bggId", "datetime"]
 )
 data class Rank(
-    val boardGameId: Long,
+    val bggId: Long,
     val datetime: LocalDateTime,
     val value: Long
 )

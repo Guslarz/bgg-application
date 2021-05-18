@@ -1,7 +1,5 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kaczmarek.bggapplication.R
 import com.kaczmarek.bggapplication.entities.bggapi.BggApiResponse
@@ -16,13 +14,17 @@ import kotlinx.coroutines.launch
 class BoardGameDetailsInsertViewModel(database: AppDatabase) :
     BoardGameDetailsViewModel(database) {
 
-    fun loadTarget(overview: BggBoardGameOverview) {
+    fun loadTarget(overview: BggBoardGameOverview?) {
         viewModelScope.launch {
             setIsLoading(true)
 
             try {
-                val details = loadGameDetails(overview.id)
-                boardGame.postValue(BoardGame(overview, details))
+                if (overview != null) {
+                    val details = loadGameDetails(overview.id)
+                    boardGame.postValue(BoardGame(overview, details))
+                } else {
+                    boardGame.postValue(BoardGame())
+                }
                 artists.postValue(listOf())
                 designers.postValue(listOf())
                 locationRelation.postValue(

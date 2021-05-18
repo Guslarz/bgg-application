@@ -65,7 +65,10 @@ class BggBoardGameOverviewListParser : BggResponseParser<List<BggBoardGameOvervi
             }
         }
         parser.require(XmlPullParser.END_TAG, NS, ITEM_TAG)
-        return BggBoardGameOverview(id, title!!, year!!)
+
+        if (year == null)
+            year = 0
+        return BggBoardGameOverview(id, title!!, year)
     }
 
     private fun readId(parser: XmlPullParser): Long {

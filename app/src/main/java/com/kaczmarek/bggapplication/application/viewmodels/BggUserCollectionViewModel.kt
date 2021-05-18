@@ -103,7 +103,7 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
         collection: List<BggBoardGameCollectionItem>, datetime: LocalDateTime) {
 
         val collectionIds = collection.map { it.id }
-        val remainingIds = database.boardGameDao().getIdsExcept(collectionIds)
+        val remainingIds = database.boardGameDao().getBggIdsExcept(collectionIds)
         val overviews = database.boardGameDao().getOverviewsByIds(remainingIds)
         for (overview in overviews) {
             if (overview.rank == null) {

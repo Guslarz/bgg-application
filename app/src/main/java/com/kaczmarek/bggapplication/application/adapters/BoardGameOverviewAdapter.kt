@@ -30,19 +30,21 @@ class BoardGameOverviewAdapter(private val data: List<BoardGameOverview>) :
         val overview = data[position]
         val context = holder.itemView.context
 
-        holder.binding.textViewRank.text = overview.rank?.toString() ?: "-"
-
         Picasso.get().load(overview.thumbnail)
             .error(ColorDrawable(Color.BLACK))
             .resize(200, 200)
             .into(holder.binding.imageViewThumbnail)
         holder.binding.imageViewThumbnail.setOnClickListener { onDetailsListener(overview) }
 
-        holder.binding.textViewContent.text = String.format(
+        holder.binding.textViewTitle.text = String.format(
             context.getString(R.string.board_game_title_and_year_template),
             overview.title, overview.yearPublished
         )
-        holder.binding.textViewContent.setOnClickListener { onDetailsListener(overview) }
+        holder.binding.textViewTitle.setOnClickListener { onDetailsListener(overview) }
+
+        val rankTemplate = holder.itemView.context.getString(R.string.rank_template)
+        holder.binding.textViewRank.text = String.format(
+            rankTemplate, overview.rank?.toString() ?: "-")
 
         holder.binding.buttonDelete.setOnClickListener { onDeleteListener(overview) }
     }

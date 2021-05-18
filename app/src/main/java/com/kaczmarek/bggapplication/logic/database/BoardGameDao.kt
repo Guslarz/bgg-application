@@ -24,11 +24,11 @@ interface BoardGameDao {
     @Query("SELECT * FROM BoardGame WHERE id = :id")
     suspend fun getBoardGameDetails(id: Long): BoardGameDetails
 
-    @Query("SELECT EXISTS(SELECT 1 FROM BoardGame WHERE id = :id)")
-    suspend fun checkBoardGameExists(id: Long): Boolean
+    @Query("SELECT EXISTS(SELECT 1 FROM BoardGame WHERE bggId = :bggId)")
+    suspend fun checkBoardGameExists(bggId: Long): Boolean
 
-    @Query("SELECT id FROM BoardGame WHERE id NOT IN (:ids)")
-    suspend fun getIdsExcept(ids: List<Long>): List<Long>
+    @Query("SELECT bggId FROM BoardGame WHERE bggId NOT IN (:ids)")
+    suspend fun getBggIdsExcept(ids: List<Long>): List<Long>
 
     @Query("SELECT * FROM BoardGameOverview WHERE id = :id")
     suspend fun getOverviewById(id: Long): BoardGameOverview

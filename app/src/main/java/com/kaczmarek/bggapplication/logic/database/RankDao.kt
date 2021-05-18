@@ -8,8 +8,8 @@ import com.kaczmarek.bggapplication.entities.database.Rank
 @Dao
 interface RankDao {
 
-    @Query("SELECT * FROM Rank WHERE boardGameId = :boardGameId")
-    suspend fun getBoardGameRanks(boardGameId: Long): List<Rank>
+    @Query("SELECT * FROM Rank WHERE bggId = :bggId")
+    suspend fun getBoardGameRanks(bggId: Long): List<Rank>
 
     @Insert
     suspend fun addRank(rank: Rank)

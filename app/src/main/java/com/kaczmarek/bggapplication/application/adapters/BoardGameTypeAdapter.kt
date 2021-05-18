@@ -7,28 +7,29 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import com.kaczmarek.bggapplication.R
-import com.kaczmarek.bggapplication.entities.BoardGameOverviewOrder
+import com.kaczmarek.bggapplication.entities.database.BoardGameType
 
-class BoardGameOverviewOrderAdapter(context: Context) :
-    ArrayAdapter<BoardGameOverviewOrder>(
+class BoardGameTypeAdapter(context: Context) :
+    ArrayAdapter<BoardGameType>(
         context, android.R.layout.simple_spinner_item,
-        BoardGameOverviewOrder.values()
+        BoardGameType.values()
     ) {
 
     companion object {
         private val LABEL_IDS = mapOf(
-            BoardGameOverviewOrder.RANK_ASC to R.string.rank_asc,
-            BoardGameOverviewOrder.RANK_DESC to R.string.rank_desc,
-            BoardGameOverviewOrder.YEAR_ASC to R.string.year_asc,
-            BoardGameOverviewOrder.YEAR_DESC to R.string.year_desc
+            BoardGameType.GAME to R.string.game,
+            BoardGameType.EXPANSION to R.string.expansion,
+            BoardGameType.MIXED to R.string.mixed
         )
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val label = context.getString(LABEL_IDS[getItem(position)]!!)
         val view = (convertView ?: LayoutInflater.from(context)
-            .inflate(android.R.layout.simple_spinner_dropdown_item,
-                parent, false)) as CheckedTextView
+            .inflate(
+                android.R.layout.simple_spinner_dropdown_item,
+                parent, false
+            )) as CheckedTextView
 
         view.text = label
         return view
@@ -37,8 +38,10 @@ class BoardGameOverviewOrderAdapter(context: Context) :
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val label = context.getString(LABEL_IDS[getItem(position)]!!)
         val view = (convertView ?: LayoutInflater.from(context)
-            .inflate(android.R.layout.simple_spinner_dropdown_item,
-                parent, false)) as CheckedTextView
+            .inflate(
+                android.R.layout.simple_spinner_dropdown_item,
+                parent, false
+            )) as CheckedTextView
 
         view.text = label
         return view

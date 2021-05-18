@@ -7,4 +7,7 @@ import androidx.room.PrimaryKey
 data class Artist(
     @PrimaryKey(autoGenerate = true) val id: Long,
     val name: String
-)
+) {
+
+    override fun toString(): String = name
+}

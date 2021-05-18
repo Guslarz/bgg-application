@@ -27,10 +27,10 @@ data class BoardGameDetails(
     )
     val artists: List<Artist>,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
+        parentColumn = "bggId",
+        entityColumn = "bggId"
     )
-    val ranks: BoardGameNewestRankView,
+    val rank: NewestRankView?,
     @Relation(
         parentColumn = "id",
         entityColumn = "id"

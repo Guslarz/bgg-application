@@ -21,6 +21,8 @@ data class Location(
         parcel.readString()!!
     )
 
+    override fun toString(): String = name
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeString(name)

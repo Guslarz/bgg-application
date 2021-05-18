@@ -29,14 +29,12 @@ data class BoardGameLocationRelation(
 ) {
 
     companion object {
-        private val DEFAULT_LOCATION_ID = null
         private const val DEFAULT_COMMENT = ""
     }
 
-    constructor(boardGameId: Long) :
-            this(
-                boardGameId = boardGameId,
-                locationId = DEFAULT_LOCATION_ID,
-                comment = DEFAULT_COMMENT
-            )
+    constructor(boardGameId: Long) : this(
+        boardGameId = boardGameId,
+        locationId = null,
+        comment = DEFAULT_COMMENT
+    )
 }
