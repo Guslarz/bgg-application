@@ -19,7 +19,7 @@ class BggApiDao(
         private const val RECONNECT_WAIT_TIME = 500L
         private const val API_URL = "https://www.boardgamegeek.com/xmlapi2/"
         private const val GET_BY_NAME_URL = "${API_URL}search?query=%s&type=boardgame"
-        private const val GET_DETAILS_URL = "${API_URL}thing?id=%d"
+        private const val GET_DETAILS_URL = "${API_URL}thing?id=%d&stats=1"
         private const val GET_COLLECTION_URL =
             "${API_URL}collection?username=%s&subtype=boardgame&stats=1&own=1"
     }

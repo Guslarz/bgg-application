@@ -57,6 +57,10 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
     }
 
     fun addArtist(artist: Artist) {
+        if (artists.value!!.contains(artist)) {
+            setErrorMessage(R.string.err_artist_already_added)
+            return
+        }
         artists.value = artists.value!!.plusElement(artist)
         queries.add {
             database.boardGamesArtistsRelationDao().addRelation(
@@ -69,6 +73,10 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
     }
 
     fun addDesigner(designer: Designer) {
+        if (designers.value!!.contains(designer)) {
+            setErrorMessage(R.string.err_designer_already_added)
+            return
+        }
         designers.value = designers.value!!.plusElement(designer)
         queries.add {
             database.boardGamesDesignersRelationDao().addRelation(
@@ -103,24 +111,16 @@ abstract class BoardGameDetailsViewModel(database: AppDatabase) : BggViewModel(d
             )
         }
     }
-    
-    fun loadAvailable() {
-        viewModelScope.launch {
-            loadAvailableArtists()
-            loadAvailableDesigners()
-            loadAvailableLocations()
-        }
-    }
 
-    private suspend fun loadAvailableArtists() {
+    protected suspend fun loadAvailableArtists() {
         availableArtists.postValue(database.artistDao().getAllArtists())
     }
 
-    private suspend fun loadAvailableDesigners() {
+    protected suspend fun loadAvailableDesigners() {
         availableDesigners.postValue(database.designerDao().getAllDesigners())
     }
 
-    private suspend fun loadAvailableLocations() {
+    protected suspend fun loadAvailableLocations() {
         availableLocations.postValue(database.locationDao().getAllLocations())
     }
 }

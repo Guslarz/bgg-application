@@ -32,7 +32,6 @@ class BoardGameOverviewAdapter(private val data: List<BoardGameOverview>) :
 
         Picasso.get().load(overview.thumbnail)
             .error(ColorDrawable(Color.BLACK))
-            .resize(200, 200)
             .into(holder.binding.imageViewThumbnail)
         holder.binding.imageViewThumbnail.setOnClickListener { onDetailsListener(overview) }
 

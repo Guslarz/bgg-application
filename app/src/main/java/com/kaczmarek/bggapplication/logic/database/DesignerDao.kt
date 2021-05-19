@@ -9,8 +9,11 @@ interface DesignerDao {
     @Query("SELECT * FROM Designer")
     suspend fun getAllDesigners(): List<Designer>
 
-    @Insert
-    suspend fun addDesigner(designer: Designer)
+    @Query("SELECT * FROM Designer WHERE name=:name")
+    suspend fun getDesignerByName(name: String): Designer?
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addDesigner(designer: Designer): Long
 
     @Update
     suspend fun updateDesigner(designer: Designer)

@@ -2,6 +2,7 @@ package com.kaczmarek.bggapplication.application.activities
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -57,7 +58,6 @@ class InsertBoardGameActivity : AppCompatActivity() {
         viewModel.getAvailableArtists().observe(this, this::onAvailableArtists)
         viewModel.getAvailableDesigners().observe(this, this::onAvailableDesigners)
         viewModel.getAvailableLocations().observe(this, this::onAvailableLocations)
-        viewModel.loadAvailable()
 
         viewModel.getBoardGame().observe(this, this::onBoardGame)
         viewModel.getArtists().observe(this, this::onArtists)
@@ -162,6 +162,7 @@ class InsertBoardGameActivity : AppCompatActivity() {
     }
 
     private fun onDesigners(designers: List<Designer>) {
+        Log.i("DESIGNERS", designers.size.toString())
         val adapter = DesignerAdapter(designers)
         adapter.setOnDeleteListener(viewModel::removeDesigner)
         binding.recyclerViewDesigners.adapter = adapter

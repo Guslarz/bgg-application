@@ -9,8 +9,11 @@ interface ArtistDao {
     @Query("SELECT * FROM Artist")
     suspend fun getAllArtists(): List<Artist>
 
-    @Insert
-    suspend fun addArtist(artist: Artist)
+    @Query("SELECT * FROM Artist WHERE name=:name")
+    suspend fun getArtistByName(name: String): Artist?
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addArtist(artist: Artist): Long
 
     @Update
     suspend fun updateArtist(artist: Artist)

@@ -30,7 +30,7 @@ class DesignerAdapter(private val designers: List<Designer>) :
         holder.binding.imageButtonDelete.setOnClickListener { onDeleteListener(designer) }
     }
 
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = designers.size
 
     fun setOnDeleteListener(listener: (Designer) -> Unit) {
         onDeleteListener = listener

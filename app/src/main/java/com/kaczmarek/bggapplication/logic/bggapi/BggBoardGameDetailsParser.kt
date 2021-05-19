@@ -1,5 +1,6 @@
 package com.kaczmarek.bggapplication.logic.bggapi
 
+import android.util.Log
 import android.util.Xml
 import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameDetails
 import org.xmlpull.v1.XmlPullParser
@@ -79,7 +80,9 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
                     }
                 }
                 DESCRIPTION_TAG -> description = readDescription(parser)
-                STATISTICS_TAG -> rank = readRankFromStatistics(parser)
+                STATISTICS_TAG -> {
+                    rank = readRankFromStatistics(parser)
+                }
                 else -> skip(parser)
             }
         }
@@ -138,6 +141,7 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
     }
 
     private fun readRankFromRanks(parser: XmlPullParser): Long? {
+        var rank: Long? = null
         parser.require(XmlPullParser.START_TAG, NS, RANKS_TAG)
         while (parser.next() != XmlPullParser.END_TAG || parser.name != RANKS_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
@@ -145,12 +149,12 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
             }
 
             if (parser.name == RANK_TAG) {
-                if (parser.getAttributeValue(NS, TYPE_ATTR) == RANK_TYPE_EXPECTED &&
-                        parser.getAttributeValue(NS, NAME_ATTR) == RANK_NAME_EXPECTED) {
-
+                val type = parser.getAttributeValue(NS, TYPE_ATTR)
+                val name =  parser.getAttributeValue(NS, NAME_ATTR)
+                if (type == RANK_TYPE_EXPECTED && name == RANK_NAME_EXPECTED) {
                     val value = parser.getAttributeValue(NS, VALUE_ATTR)
                     if (value != NOT_RANKED_VALUE) {
-                        return value.toLong()
+                        rank = value.toLong()
                     }
                 }
             } else {
@@ -158,6 +162,6 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
             }
         }
         parser.require(XmlPullParser.END_TAG, NS, RANKS_TAG)
-        return null
+        return rank
     }
 }
