@@ -71,7 +71,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onBoardGameDetails(overview: BoardGameOverview) {
-
+        val intent = Intent(this, UpdateBoardGameActivity::class.java).apply {
+            putExtra(UpdateBoardGameActivity.EXTRA_NAME, overview.id)
+        }
+        startActivity(intent)
     }
 
     private fun onBoardGameDelete(overview: BoardGameOverview) {

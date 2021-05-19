@@ -50,4 +50,6 @@
     <string name="rank_template">Rank: %s</string>
     <string name="err_artist_already_added">Artist already added</string>
     <string name="err_designer_already_added">Designer already added</string>
+    <string name="rank_label">Rank:</string>
+    <string name="rank_history">Rank history</string>
 </resources>

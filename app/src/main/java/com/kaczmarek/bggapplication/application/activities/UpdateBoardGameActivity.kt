@@ -1,10 +1,8 @@
 package com.kaczmarek.bggapplication.application.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,29 +13,28 @@ import com.kaczmarek.bggapplication.application.adapters.BoardGameTypeAdapter
 import com.kaczmarek.bggapplication.application.adapters.DefaultValueSpinnerAdapter
 import com.kaczmarek.bggapplication.application.adapters.DesignerAdapter
 import com.kaczmarek.bggapplication.application.viewmodels.BggViewModelFactory
-import com.kaczmarek.bggapplication.application.viewmodels.BoardGameDetailsInsertViewModel
-import com.kaczmarek.bggapplication.databinding.ActivityInsertBoardGameBinding
-import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameOverview
+import com.kaczmarek.bggapplication.application.viewmodels.BoardGameDetailsUpdateViewModel
+import com.kaczmarek.bggapplication.databinding.ActivityUpdateBoardGameBinding
 import com.kaczmarek.bggapplication.entities.database.*
 import com.squareup.picasso.Picasso
 import java.time.LocalDate
 
-class InsertBoardGameActivity : AppCompatActivity() {
+class UpdateBoardGameActivity : AppCompatActivity() {
 
     companion object {
-        const val PARCEL_NAME = "overview"
+        const val EXTRA_NAME = "boardGameId"
         private const val MIN_YEAR_PUBLISHED = 1900
         private const val MAX_YEAR_PUBLISHED = 2100
     }
 
-    private lateinit var binding: ActivityInsertBoardGameBinding
-    private val viewModel: BoardGameDetailsInsertViewModel by viewModels {
+    private lateinit var binding: ActivityUpdateBoardGameBinding
+    private val viewModel: BoardGameDetailsUpdateViewModel by viewModels {
         BggViewModelFactory((application as BggApplication).database)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityInsertBoardGameBinding.inflate(layoutInflater)
+        binding = ActivityUpdateBoardGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.spinnerType.adapter = BoardGameTypeAdapter(this)
@@ -60,15 +57,32 @@ class InsertBoardGameActivity : AppCompatActivity() {
         viewModel.getAvailableLocations().observe(this, this::onAvailableLocations)
 
         viewModel.getBoardGame().observe(this, this::onBoardGame)
+        viewModel.getRank().observe(this, this::onRank)
         viewModel.getArtists().observe(this, this::onArtists)
         viewModel.getDesigners().observe(this, this::onDesigners)
         viewModel.getLocationRelation().observe(this, this::onLocationRelation)
 
-        val overview: BggBoardGameOverview? = intent.getParcelableExtra(PARCEL_NAME)
-        viewModel.loadTarget(overview)
+        viewModel.loadTarget(intent.getLongExtra(EXTRA_NAME, -1))
 
         binding.buttonSave.setOnClickListener { onSaveClick() }
         binding.buttonCancel.setOnClickListener { onCancelClick() }
+    }
+
+    private fun onRankHistoryClick() {
+        //val bggId = viewModel.getRank().value?.bggId
+        //if (bggId != null) {
+        // TODO sth
+        //}
+    }
+
+    private fun onRank(rank: NewestRankView?) {
+        if (rank == null) {
+            binding.linearLayoutRank.visibility = View.GONE
+        } else {
+            binding.linearLayoutRank.visibility = View.VISIBLE
+            binding.textViewCurrentRank.text = rank.rank?.toString() ?: "-"
+            binding.buttonRankHistory.setOnClickListener { onRankHistoryClick() }
+        }
     }
 
     private fun onAvailableArtists(artists: List<Artist>) {
@@ -183,21 +197,22 @@ class InsertBoardGameActivity : AppCompatActivity() {
         } else {
             val position = availableLocations.indexOfFirst { it.id == locationRelation.locationId }
             binding.spinnerLocations.setSelection(position + 1, false)
-            binding.spinnerLocations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?, view: View?,
-                    position: Int, id: Long
-                ) {
-                    val location = parent!!.getItemAtPosition(position)
-                    if (location == null) {
-                        locationRelation.locationId = null
-                    } else {
-                        locationRelation.locationId = (location as Location).id
+            binding.spinnerLocations.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?, view: View?,
+                        position: Int, id: Long
+                    ) {
+                        val location = parent!!.getItemAtPosition(position)
+                        if (location == null) {
+                            locationRelation.locationId = null
+                        } else {
+                            locationRelation.locationId = (location as Location).id
+                        }
                     }
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) { }
-            }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
 
             setText(binding.editTextLocationComment, locationRelation.comment ?: "")
             bindCallback(binding.editTextLocationComment) {
