@@ -12,13 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BggApplication">
-        <activity android:name=".application.activities.RankHistoryActivity"></activity>
-        <activity android:name=".application.activities.UpdateBoardGameActivity" />
-        <activity android:name=".application.activities.InsertBoardGameActivity" />
-        <activity android:name=".application.activities.ImportGameActivity" />
-        <activity android:name=".application.activities.LocationDetailsActivity" />
-        <activity android:name=".application.activities.LocationListActivity" />
-        <activity android:name=".application.activities.MainActivity">
+        <activity android:name=".application.activities.UserCollectionActivity"></activity>
+        <activity
+            android:name=".application.activities.RankHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".application.activities.UpdateBoardGameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".application.activities.InsertBoardGameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".application.activities.ImportGameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".application.activities.LocationDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".application.activities.LocationListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".application.activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

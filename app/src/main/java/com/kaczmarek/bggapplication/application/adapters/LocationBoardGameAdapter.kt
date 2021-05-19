@@ -24,9 +24,12 @@ class LocationBoardGameAdapter(private val boardGames: List<LocationBoardGameOve
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val game = boardGames[position]
 
-        val template = holder.itemView.context.getString(R.string.board_game_title_and_year_template)
-        holder.binding.textViewTitle.text = String.format(template, game.boardGame.title,
-            game.boardGame.yearPublished)
+        val template =
+            holder.itemView.context.getString(R.string.board_game_title_and_year_template)
+        holder.binding.textViewItemTitle.text = String.format(
+            template, game.boardGame.title,
+            game.boardGame.yearPublished
+        )
 
         holder.binding.textViewComment.text = game.locationRelation.comment
     }

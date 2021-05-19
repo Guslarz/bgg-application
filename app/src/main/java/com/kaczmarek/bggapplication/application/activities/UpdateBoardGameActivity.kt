@@ -1,7 +1,7 @@
 package com.kaczmarek.bggapplication.application.activities
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
@@ -69,10 +69,17 @@ class UpdateBoardGameActivity : AppCompatActivity() {
     }
 
     private fun onRankHistoryClick() {
-        //val bggId = viewModel.getRank().value?.bggId
-        //if (bggId != null) {
-        // TODO sth
-        //}
+        val bggId = viewModel.getRank().value?.bggId
+        if (bggId != null) {
+            val intent = Intent(this, RankHistoryActivity::class.java).apply {
+                putExtra(RankHistoryActivity.BGG_ID_EXTRA_NAME, bggId)
+                putExtra(
+                    RankHistoryActivity.TITLE_EXTRA_NAME,
+                    viewModel.getBoardGame().value!!.title
+                )
+            }
+            startActivity(intent)
+        }
     }
 
     private fun onRank(rank: NewestRankView?) {

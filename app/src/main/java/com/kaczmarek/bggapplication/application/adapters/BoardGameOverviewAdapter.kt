@@ -37,7 +37,7 @@ class BoardGameOverviewAdapter(private val data: List<BoardGameOverview>) :
 
         holder.binding.linearLayoutContent.setOnClickListener { onDetailsListener(overview) }
 
-        holder.binding.textViewTitle.text = String.format(
+        holder.binding.textViewItemTitle.text = String.format(
             context.getString(R.string.board_game_title_and_year_template),
             overview.title, overview.yearPublished
         )

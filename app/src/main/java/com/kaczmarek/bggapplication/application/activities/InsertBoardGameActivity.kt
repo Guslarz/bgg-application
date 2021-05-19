@@ -1,10 +1,7 @@
 package com.kaczmarek.bggapplication.application.activities
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -183,21 +180,22 @@ class InsertBoardGameActivity : AppCompatActivity() {
         } else {
             val position = availableLocations.indexOfFirst { it.id == locationRelation.locationId }
             binding.spinnerLocations.setSelection(position + 1, false)
-            binding.spinnerLocations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?, view: View?,
-                    position: Int, id: Long
-                ) {
-                    val location = parent!!.getItemAtPosition(position)
-                    if (location == null) {
-                        locationRelation.locationId = null
-                    } else {
-                        locationRelation.locationId = (location as Location).id
+            binding.spinnerLocations.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?, view: View?,
+                        position: Int, id: Long
+                    ) {
+                        val location = parent!!.getItemAtPosition(position)
+                        if (location == null) {
+                            locationRelation.locationId = null
+                        } else {
+                            locationRelation.locationId = (location as Location).id
+                        }
                     }
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) { }
-            }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
 
             setText(binding.editTextLocationComment, locationRelation.comment ?: "")
             bindCallback(binding.editTextLocationComment) {

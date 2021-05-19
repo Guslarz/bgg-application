@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
             entity = Location::class,
             parentColumns = ["id"],
             childColumns = ["locationId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.RESTRICT
         )
     ],
     indices = [Index("locationId")]

@@ -7,4 +7,6 @@
     <dimen name="board_game_overview_horizontal_margin">16dp</dimen>
     <dimen name="location_row_horizontal_padding">16dp</dimen>
     <dimen name="location_row_vertical_padding">4dp</dimen>
+    <dimen name="weight_date">1</dimen>
+    <dimen name="weight_value">1</dimen>
 </resources>

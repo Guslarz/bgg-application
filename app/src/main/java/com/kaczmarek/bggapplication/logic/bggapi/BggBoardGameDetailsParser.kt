@@ -116,6 +116,7 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
         readText(parser, NS, DESCRIPTION_TAG)
 
     private fun readRankFromStatistics(parser: XmlPullParser): Long? {
+        var rank: Long? = null
         parser.require(XmlPullParser.START_TAG, NS, STATISTICS_TAG)
         while (parser.next() != XmlPullParser.START_TAG) {
             continue
@@ -127,7 +128,7 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
             }
 
             if (parser.name == RANKS_TAG) {
-                return readRankFromRanks(parser)
+                rank = readRankFromRanks(parser)
             } else {
                 skip(parser)
             }
@@ -137,7 +138,7 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
             continue
         }
         parser.require(XmlPullParser.END_TAG, NS, STATISTICS_TAG)
-        return null
+        return rank
     }
 
     private fun readRankFromRanks(parser: XmlPullParser): Long? {

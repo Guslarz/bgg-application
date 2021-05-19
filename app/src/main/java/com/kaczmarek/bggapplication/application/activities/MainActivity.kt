@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onUserCollectionClick() {
-
+        val intent = Intent(this, UserCollectionActivity::class.java)
+        startActivity(intent)
     }
 
     private fun onLocationsClick() {

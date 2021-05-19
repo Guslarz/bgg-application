@@ -90,6 +90,7 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
     private fun readYear(parser: XmlPullParser) = readText(parser, NS, YEAR_TAG).toInt()
 
     private fun readRankFromStatistics(parser: XmlPullParser): Long? {
+        var rank: Long? = null
         parser.require(XmlPullParser.START_TAG, NS, STATISTICS_TAG)
         while (parser.next() != XmlPullParser.START_TAG) {
             continue
@@ -101,7 +102,7 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
             }
 
             if (parser.name == RANKS_TAG) {
-                return readRankFromRanks(parser)
+                rank = readRankFromRanks(parser)
             } else {
                 skip(parser)
             }
@@ -111,10 +112,11 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
             continue
         }
         parser.require(XmlPullParser.END_TAG, NS, STATISTICS_TAG)
-        return null
+        return rank
     }
 
     private fun readRankFromRanks(parser: XmlPullParser): Long? {
+        var rank: Long? = null
         parser.require(XmlPullParser.START_TAG, NS, RANKS_TAG)
         while (parser.next() != XmlPullParser.END_TAG || parser.name != RANKS_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
@@ -122,12 +124,12 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
             }
 
             if (parser.name == RANK_TAG) {
-                if (parser.getAttributeValue(NS, TYPE_ATTR) == RANK_TYPE_EXPECTED &&
-                    parser.getAttributeValue(NS, NAME_ATTR) == RANK_NAME_EXPECTED) {
-
+                val type = parser.getAttributeValue(NS, TYPE_ATTR)
+                val name =  parser.getAttributeValue(NS, NAME_ATTR)
+                if (type == RANK_TYPE_EXPECTED && name == RANK_NAME_EXPECTED) {
                     val value = parser.getAttributeValue(NS, VALUE_ATTR)
                     if (value != NOT_RANKED_VALUE) {
-                        return value.toLong()
+                        rank = value.toLong()
                     }
                 }
             } else {
@@ -135,7 +137,7 @@ class BggBoardGameCollectionItemListParser : BggResponseParser<List<BggBoardGame
             }
         }
         parser.require(XmlPullParser.END_TAG, NS, RANKS_TAG)
-        return null
+        return rank
     }
 
     private fun readComment(parser: XmlPullParser) = readText(parser, NS, COMMENT_TAG)

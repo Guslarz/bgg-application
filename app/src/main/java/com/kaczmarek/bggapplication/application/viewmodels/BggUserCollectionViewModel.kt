@@ -1,5 +1,6 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,9 +9,7 @@ import com.kaczmarek.bggapplication.R
 import com.kaczmarek.bggapplication.entities.bggapi.BggApiResponse
 import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameCollectionItem
 import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameDetails
-import com.kaczmarek.bggapplication.entities.database.BoardGame
-import com.kaczmarek.bggapplication.entities.database.BoardGameLocationRelation
-import com.kaczmarek.bggapplication.entities.database.Rank
+import com.kaczmarek.bggapplication.entities.database.*
 import com.kaczmarek.bggapplication.logic.bggapi.BggApiDao
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
@@ -20,40 +19,37 @@ import java.time.LocalDateTime
 
 class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database) {
 
-    @Volatile
-    private var userCollection: List<BggBoardGameCollectionItem>? = null
+    private val userCollection = MutableLiveData<List<BggBoardGameCollectionItem>>()
     private val hasCollection = MutableLiveData<Boolean>()
 
+    fun getUserCollection(): LiveData<List<BggBoardGameCollectionItem>> = userCollection
     fun getHasCollection(): LiveData<Boolean> = hasCollection
 
     fun searchByUsername(username: String) {
         viewModelScope.launch {
-            hasCollection.postValue(false)
             setIsLoading(true)
             try {
-                userCollection = loadUserCollection(username)
+                userCollection.postValue(loadUserCollection(username))
                 hasCollection.postValue(true)
             } catch (e: Exception) {
                 setErrorMessage(R.string.err_bgg_api_request_failed)
+                userCollection.postValue(listOf())
+                hasCollection.postValue(false)
             }
             setIsLoading(false)
         }
     }
 
-    fun importCollection() {
+    fun importItem(item: BggBoardGameCollectionItem) {
         viewModelScope.launch {
-            setIsLoading(true)
             database.withTransaction {
-                for (item in userCollection!!) {
-                    addItem(item)
-                }
+                addItem(item)
             }
-            setIsLoading(false)
         }
     }
 
     fun updateRanking() {
-        val collection = userCollection!!
+        val collection = userCollection.value!!
         val datetime = LocalDateTime.now()
         viewModelScope.launch {
             setIsLoading(true)
@@ -77,8 +73,41 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
         val details = loadItemDetails(item.id)
         val boardGame = BoardGame(item, details)
         val boardGameId = database.boardGameDao().addBoardGame(boardGame)
+
         val locationRelation = BoardGameLocationRelation(boardGameId)
         database.boardGameLocationRelationDao().addRelation(locationRelation)
+
+        if (details.rank != null) {
+            database.rankDao().addRank(Rank(item.id, LocalDateTime.now(), details.rank))
+        }
+
+        for (name in details.artists) {
+            var artist = database.artistDao().getArtistByName(name)
+            if (artist == null) {
+                artist = Artist(0, name)
+                artist.id = database.artistDao().addArtist(artist)
+            }
+            database.boardGamesArtistsRelationDao().addRelation(
+                BoardGamesArtistsRelation(
+                    item.id,
+                    artist.id
+                )
+            )
+        }
+
+        for (name in details.designers) {
+            var designer = database.designerDao().getDesignerByName(name)
+            if (designer == null) {
+                designer = Designer(0, name)
+                designer.id = database.designerDao().addDesigner(designer)
+            }
+            database.boardGamesDesignersRelationDao().addRelation(
+                BoardGamesDesignersRelation(
+                    item.id,
+                    designer.id
+                )
+            )
+        }
     }
 
     private suspend fun loadItemDetails(id: Long): BggBoardGameDetails {
@@ -93,7 +122,7 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
         collection: List<BggBoardGameCollectionItem>, datetime: LocalDateTime) {
 
         for (item in collection) {
-            if (item.rank != null && database.boardGameDao().checkBoardGameExists(item.id)) {
+            if (item.rank != null) {
                 database.rankDao().addRank(Rank(item.id, datetime, item.rank))
             }
         }

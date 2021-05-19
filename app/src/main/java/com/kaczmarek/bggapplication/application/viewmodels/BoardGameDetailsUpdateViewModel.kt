@@ -1,13 +1,11 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kaczmarek.bggapplication.entities.database.BoardGame
 import com.kaczmarek.bggapplication.entities.database.BoardGameLocationRelation
 import com.kaczmarek.bggapplication.entities.database.NewestRankView
-import com.kaczmarek.bggapplication.entities.database.Rank
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
 

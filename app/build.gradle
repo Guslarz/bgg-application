@@ -62,6 +62,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
-    // picasso
+    // Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
 }

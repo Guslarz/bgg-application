@@ -35,8 +35,12 @@ class LocationListViewModel(database: AppDatabase) : BggViewModel(database) {
 
     fun removeLocation(location: LocationWithBoardGameCount) {
         viewModelScope.launch {
-            database.locationDao().deleteLocation(location.location)
-            locationList.postValue(locationList.value!!.minusElement(location))
+            try {
+                database.locationDao().deleteLocation(location.location)
+                locationList.postValue(locationList.value!!.minusElement(location))
+            } catch (e: SQLiteConstraintException) {
+                setErrorMessage(R.string.err_location_not_empty)
+            }
         }
     }
 

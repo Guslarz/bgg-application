@@ -52,4 +52,12 @@
     <string name="err_designer_already_added">Designer already added</string>
     <string name="rank_label">Rank:</string>
     <string name="rank_history">Rank history</string>
+    <string name="back">Back</string>
+    <string name="date">Date</string>
+    <string name="value">Rank</string>
+    <string name="username_label">Username:</string>
+    <string name="import_collection">Import collection</string>
+    <string name="update_ranking">Update ranking</string>
+    <string name="username">Username</string>
+    <string name="err_location_not_empty">Cannot delete not empty location</string>
 </resources>
