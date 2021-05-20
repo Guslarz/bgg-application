@@ -3,10 +3,6 @@
     <string name="err_bgg_api_request_failed">Request failed</string>
     <string name="thumbnail_description">Board game thumbnail</string>
     <string name="delete_button_description">Delete</string>
-    <string name="board_game_overview_header_rank">Rank</string>
-    <string name="board_game_overview_header_thumbnail">Image</string>
-    <string name="board_game_overview_header_content">Game</string>
-    <string name="board_game_overview_header_delete">Delete</string>
     <string name="add_board_game">Add new board game</string>
     <string name="board_game_title_and_year_template">%s (%d)</string>
     <string name="order_by">Order by:</string>
@@ -55,12 +51,12 @@
     <string name="back">Back</string>
     <string name="date">Date</string>
     <string name="value">Rank</string>
-    <string name="username_label">Username:</string>
-    <string name="import_collection">Import collection</string>
     <string name="update_ranking">Update ranking</string>
     <string name="username">Username</string>
     <string name="err_location_not_empty">Cannot delete not empty location</string>
     <string name="find_game">Find game…</string>
     <string name="location_name">Location name</string>
     <string name="add_designer">Add designer</string>
+    <string name="thumbnail_preview">Thumbnail preview</string>
+    <string name="add_item">Add item</string>
 </resources>

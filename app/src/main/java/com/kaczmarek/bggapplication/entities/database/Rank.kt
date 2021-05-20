@@ -1,7 +1,6 @@
 package com.kaczmarek.bggapplication.entities.database
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import java.time.LocalDateTime
 
 @Entity(

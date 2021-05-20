@@ -1,7 +1,6 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
 import android.database.sqlite.SQLiteConstraintException
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

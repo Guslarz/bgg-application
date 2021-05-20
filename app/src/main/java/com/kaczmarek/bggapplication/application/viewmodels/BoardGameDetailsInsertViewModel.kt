@@ -10,13 +10,12 @@ import com.kaczmarek.bggapplication.entities.database.*
 import com.kaczmarek.bggapplication.logic.bggapi.BggApiDao
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 class BoardGameDetailsInsertViewModel(database: AppDatabase) :
     BoardGameDetailsViewModel(database) {
 
-    var details: BggBoardGameDetails? = null
+    private var details: BggBoardGameDetails? = null
 
     fun loadTarget(overview: BggBoardGameOverview?) {
         viewModelScope.launch {

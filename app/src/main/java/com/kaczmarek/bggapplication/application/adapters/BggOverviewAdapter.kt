@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaczmarek.bggapplication.R
 import com.kaczmarek.bggapplication.databinding.BggOverviewRowBinding
 import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameOverview
-import com.squareup.picasso.Picasso
 
 class BggOverviewAdapter(private val overviews: List<BggBoardGameOverview>) :
     RecyclerView.Adapter<BggOverviewAdapter.ViewHolder>() {

@@ -30,14 +30,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_label"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextTitle"/>
 
                 <EditText
                     android:id="@+id/editTextTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,14 +52,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/original_title_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextOriginalTitle"/>
 
                 <EditText
                     android:id="@+id/editTextOriginalTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -110,14 +114,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/thumbnail_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextThumbnail"/>
 
                 <EditText
                     android:id="@+id/editTextThumbnail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,7 +142,8 @@
                     android:id="@+id/imageViewThumbnailPreview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:contentDescription="@string/thumbnail_preview" />
 
             </LinearLayout>
 
@@ -150,7 +157,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/description_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextDescription"/>
 
                 <EditText
                     android:id="@+id/editTextDescription"
@@ -159,7 +167,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="start|top"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:autofillHints="" />
 
             </LinearLayout>
 
@@ -215,7 +224,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/price_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextPrice"/>
 
                 <EditText
                     android:id="@+id/editTextPrice"
@@ -223,7 +233,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:autofillHints="" />
 
             </LinearLayout>
 
@@ -237,7 +248,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/suggested_retail_price_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextSuggestedRetailPrice"/>
 
                 <EditText
                     android:id="@+id/editTextSuggestedRetailPrice"
@@ -245,7 +257,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -258,14 +271,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/code_ean_upc_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextCodeEanUpc"/>
 
                 <EditText
                     android:id="@+id/editTextCodeEanUpc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -278,14 +293,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/production_code_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextProductionCode"/>
 
                 <EditText
                     android:id="@+id/editTextProductionCode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -298,7 +315,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextComment"/>
 
                 <EditText
                     android:id="@+id/editTextComment"
@@ -307,7 +325,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="start|top"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:autofillHints="" />
 
             </LinearLayout>
 
@@ -419,14 +438,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/location_comment_label"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:labelFor="@id/editTextLocationComment"/>
 
                 <EditText
                     android:id="@+id/editTextLocationComment"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="" />
             </LinearLayout>
 
             <LinearLayout
@@ -477,19 +498,19 @@
         style="?android:buttonBarStyle">
 
         <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/save"
-            style="?android:buttonBarPositiveButtonStyle" />
-
-        <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/cancel"
             style="?android:buttonBarNegativeButtonStyle" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save"
+            style="?android:buttonBarPositiveButtonStyle" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.kaczmarek.bggapplication.logic.bggapi
 
-import android.util.Log
 import android.util.Xml
 import com.kaczmarek.bggapplication.entities.bggapi.BggBoardGameDetails
 import org.xmlpull.v1.XmlPullParser
@@ -55,7 +54,7 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
         val artists = mutableListOf<String>()
         var description: String? = null
         var rank: Long? = null
-        var type = readType(parser)
+        val type = readType(parser)
 
         while (parser.next() != XmlPullParser.END_TAG || parser.name != ITEM_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
