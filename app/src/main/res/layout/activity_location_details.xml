@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".application.activities.LocationDetailsActivity">
 
@@ -19,14 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name_label"
-            android:padding="4dp"/>
+            android:layout_marginEnd="8dp"/>
 
         <EditText
             android:id="@+id/editTextName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="text" />
+            android:inputType="text"
+            android:hint="@string/location_name"/>
     </LinearLayout>
 
     <ScrollView
@@ -50,7 +52,8 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:id="@+id/buttonSave"
@@ -58,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/save"
-            android:layout_marginHorizontal="4dp"/>
+            style="?android:attr/buttonBarButtonStyle"/>
 
         <Button
             android:id="@+id/buttonCancel"
@@ -66,6 +69,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@android:string/cancel"
-            android:layout_marginHorizontal="4dp"/>
+            style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

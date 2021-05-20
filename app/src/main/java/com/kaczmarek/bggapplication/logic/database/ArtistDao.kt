@@ -6,7 +6,7 @@ import com.kaczmarek.bggapplication.entities.database.Artist
 @Dao
 interface ArtistDao {
 
-    @Query("SELECT * FROM Artist")
+    @Query("SELECT * FROM Artist ORDER BY name")
     suspend fun getAllArtists(): List<Artist>
 
     @Query("SELECT * FROM Artist WHERE name=:name")

@@ -30,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
             return INSTANCE ?: synchronized(LOCK) {
                 INSTANCE ?: Room
                     .databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME)
+                    //.inMemoryDatabaseBuilder(context.applicationContext, AppDatabase::class.java)
                     .build()
             }
         }

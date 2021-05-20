@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kaczmarek.bggapplication.application.BggApplication
 import com.kaczmarek.bggapplication.application.adapters.ArtistAdapter
@@ -138,7 +139,8 @@ class UpdateBoardGameActivity : AppCompatActivity() {
         }
         loadThumbnailPreview(boardGame.thumbnail)
 
-        setText(binding.editTextDescription, boardGame.description)
+        setText(binding.editTextDescription, HtmlCompat.fromHtml(
+            boardGame.description, HtmlCompat.FROM_HTML_MODE_COMPACT).toString())
         bindCallback(binding.editTextDescription) { boardGame.description = it }
 
         setDateInPicker(binding.datePickerOrder, boardGame.orderDate)

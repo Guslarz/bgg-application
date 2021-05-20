@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".application.activities.InsertBoardGameActivity">
 
     <ScrollView
@@ -28,7 +29,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_label" />
+                    android:text="@string/title_label"
+                    android:layout_marginEnd="8dp"/>
 
                 <EditText
                     android:id="@+id/editTextTitle"
@@ -47,7 +49,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/original_title_label" />
+                    android:text="@string/original_title_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextOriginalTitle"
@@ -66,12 +69,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/type_label" />
+                    android:text="@string/type_label"
+                    android:layout_marginEnd="8dp" />
 
                 <Spinner
                     android:id="@+id/spinnerType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"/>
             </LinearLayout>
 
             <LinearLayout
@@ -83,12 +89,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/year_published_label" />
+                    android:text="@string/year_published_label"
+                    android:layout_marginEnd="8dp" />
 
                 <NumberPicker
                     android:id="@+id/numberPickerYearPublished"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -101,7 +109,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/thumbnail_label" />
+                    android:text="@string/thumbnail_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextThumbnail"
@@ -120,7 +129,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/thumbnail_preview_label" />
+                    android:text="@string/thumbnail_preview_label"
+                    android:layout_marginEnd="8dp" />
 
                 <ImageView
                     android:id="@+id/imageViewThumbnailPreview"
@@ -139,7 +149,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/description_label" />
+                    android:text="@string/description_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextDescription"
@@ -161,14 +172,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/order_date_label" />
+                    android:text="@string/order_date_label"
+                    android:layout_marginEnd="8dp" />
 
                 <DatePicker
                     android:id="@+id/datePickerOrder"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                    android:datePickerMode="spinner"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -180,14 +193,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_to_collection_date_label" />
+                    android:text="@string/add_to_collection_date_label"
+                    android:layout_marginEnd="8dp" />
 
                 <DatePicker
                     android:id="@+id/datePickerAddToCollection"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                    android:datePickerMode="spinner"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -199,7 +214,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/price_label" />
+                    android:text="@string/price_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextPrice"
@@ -220,7 +236,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/suggested_retail_price_label" />
+                    android:text="@string/suggested_retail_price_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextSuggestedRetailPrice"
@@ -240,7 +257,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/code_ean_upc_label" />
+                    android:text="@string/code_ean_upc_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextCodeEanUpc"
@@ -259,7 +277,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/production_code_label" />
+                    android:text="@string/production_code_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextProductionCode"
@@ -278,7 +297,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/comment_label" />
+                    android:text="@string/comment_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextComment"
@@ -300,7 +320,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/artists_label" />
+                    android:text="@string/artists_label"
+                    android:layout_marginEnd="8dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -321,7 +342,7 @@
 
                     <Button
                         android:id="@+id/buttonAddArtist"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/add_artist" />
 
@@ -338,7 +359,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/designers_label" />
+                    android:text="@string/designers_label"
+                    android:layout_marginEnd="8dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -359,9 +381,9 @@
 
                     <Button
                         android:id="@+id/buttonAddDesigner"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/add_artist" />
+                        android:text="@string/add_designer" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -375,7 +397,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location_label" />
+                    android:text="@string/location_label"
+                    android:layout_marginEnd="8dp" />
 
                 <Spinner
                     android:id="@+id/spinnerLocations"
@@ -395,7 +418,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location_comment_label" />
+                    android:text="@string/location_comment_label"
+                    android:layout_marginEnd="8dp" />
 
                 <EditText
                     android:id="@+id/editTextLocationComment"
@@ -416,13 +440,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/rank_label" />
+                    android:text="@string/rank_label"
+                    android:layout_marginEnd="8dp"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
 
                     <TextView
                         android:id="@+id/textViewCurrentRank"
@@ -431,7 +457,7 @@
 
                     <Button
                         android:id="@+id/buttonRankHistory"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/rank_history" />
 
@@ -447,20 +473,23 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:buttonBarStyle">
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/save" />
+            android:text="@string/save"
+            style="?android:buttonBarPositiveButtonStyle" />
 
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            style="?android:buttonBarNegativeButtonStyle" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

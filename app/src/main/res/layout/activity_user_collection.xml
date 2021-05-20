@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".application.activities.UserCollectionActivity">
 
     <LinearLayout
@@ -22,7 +23,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/username"
-            android:inputType="text" />
+            android:inputType="text"
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/buttonSearch"
@@ -48,7 +50,7 @@
 
     <Button
         android:id="@+id/buttonRanking"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/update_ranking"
         android:enabled="false"
@@ -58,7 +60,7 @@
 
     <Button
         android:id="@+id/buttonBack"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"

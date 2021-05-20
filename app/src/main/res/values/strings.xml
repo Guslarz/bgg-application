@@ -9,7 +9,7 @@
     <string name="board_game_overview_header_delete">Delete</string>
     <string name="add_board_game">Add new board game</string>
     <string name="board_game_title_and_year_template">%s (%d)</string>
-    <string name="order_by">Order by</string>
+    <string name="order_by">Order by:</string>
     <string name="rank_asc">Rank ASC</string>
     <string name="rank_desc">Rank DESC</string>
     <string name="year_asc">Year ASC</string>
@@ -43,7 +43,7 @@
     <string name="add_artist">Add artist</string>
     <string name="designers_label">Designers:</string>
     <string name="location_label">Location:</string>
-    <string name="location_comment_label">Location comment</string>
+    <string name="location_comment_label">Location comment:</string>
     <string name="game">Game</string>
     <string name="expansion">Expansion</string>
     <string name="mixed">Mixed</string>
@@ -60,4 +60,7 @@
     <string name="update_ranking">Update ranking</string>
     <string name="username">Username</string>
     <string name="err_location_not_empty">Cannot delete not empty location</string>
+    <string name="find_game">Find game…</string>
+    <string name="location_name">Location name</string>
+    <string name="add_designer">Add designer</string>
 </resources>

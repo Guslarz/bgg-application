@@ -55,7 +55,7 @@ class BggBoardGameDetailsParser : BggResponseParser<BggBoardGameDetails> {
         val artists = mutableListOf<String>()
         var description: String? = null
         var rank: Long? = null
-        val type = readType(parser)
+        var type = readType(parser)
 
         while (parser.next() != XmlPullParser.END_TAG || parser.name != ITEM_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {

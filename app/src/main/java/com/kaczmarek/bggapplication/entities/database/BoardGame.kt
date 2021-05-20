@@ -37,6 +37,18 @@ data class BoardGame(
         private const val DEFAULT_CODE_EAN_UPC = ""
         private const val DEFAULT_PRODUCTION_CODE = ""
         private const val DEFAULT_COMMENT = ""
+        private const val BOARD_GAME_TYPE = "boardgame"
+        private const val BOARD_GAME_EXPANSION_TYPE = "boardgameexpansion"
+
+        private fun getType(details: BggBoardGameDetails): BoardGameType {
+            return if (details.type == BOARD_GAME_TYPE) {
+                BoardGameType.GAME
+            } else if (details.type == BOARD_GAME_EXPANSION_TYPE) {
+                BoardGameType.EXPANSION
+            } else {
+                BoardGameType.MIXED
+            }
+        }
     }
 
     constructor(overview: BggBoardGameOverview, details: BggBoardGameDetails) : this(
@@ -52,7 +64,7 @@ data class BoardGame(
         codeEanUpc = DEFAULT_CODE_EAN_UPC,
         bggId = overview.id,
         productionCode = DEFAULT_PRODUCTION_CODE,
-        type = BoardGameType.GAME,
+        type = getType(details),
         comment = DEFAULT_COMMENT,
         thumbnail = details.thumbnail
     )
@@ -88,7 +100,7 @@ data class BoardGame(
         codeEanUpc = DEFAULT_CODE_EAN_UPC,
         bggId = item.id,
         productionCode = DEFAULT_PRODUCTION_CODE,
-        type = BoardGameType.GAME,
+        type = getType(details),
         comment = item.comment ?: DEFAULT_COMMENT,
         thumbnail = details.thumbnail
     )

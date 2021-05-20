@@ -6,7 +6,7 @@ import com.kaczmarek.bggapplication.entities.database.Designer
 @Dao
 interface DesignerDao {
 
-    @Query("SELECT * FROM Designer")
+    @Query("SELECT * FROM Designer ORDER BY name")
     suspend fun getAllDesigners(): List<Designer>
 
     @Query("SELECT * FROM Designer WHERE name=:name")

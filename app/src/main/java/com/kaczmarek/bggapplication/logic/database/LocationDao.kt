@@ -8,7 +8,7 @@ import com.kaczmarek.bggapplication.entities.database.LocationBoardGameOverview
 @Dao
 interface LocationDao {
 
-    @Query("SELECT * FROM Location")
+    @Query("SELECT * FROM Location ORDER BY name")
     suspend fun getAllLocations(): List<Location>
 
     @Query("SELECT * FROM LocationWithBoardGameCount ORDER BY name")

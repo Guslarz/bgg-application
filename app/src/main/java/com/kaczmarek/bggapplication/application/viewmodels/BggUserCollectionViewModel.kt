@@ -1,6 +1,5 @@
 package com.kaczmarek.bggapplication.application.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -13,8 +12,6 @@ import com.kaczmarek.bggapplication.entities.database.*
 import com.kaczmarek.bggapplication.logic.bggapi.BggApiDao
 import com.kaczmarek.bggapplication.logic.database.AppDatabase
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import java.lang.RuntimeException
 import java.time.LocalDateTime
 
 class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database) {
@@ -89,7 +86,7 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
             }
             database.boardGamesArtistsRelationDao().addRelation(
                 BoardGamesArtistsRelation(
-                    item.id,
+                    boardGameId,
                     artist.id
                 )
             )
@@ -103,7 +100,7 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
             }
             database.boardGamesDesignersRelationDao().addRelation(
                 BoardGamesDesignersRelation(
-                    item.id,
+                    boardGameId,
                     designer.id
                 )
             )
@@ -119,7 +116,8 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
     }
 
     private suspend fun updateRankingFromCollection(
-        collection: List<BggBoardGameCollectionItem>, datetime: LocalDateTime) {
+        collection: List<BggBoardGameCollectionItem>, datetime: LocalDateTime
+    ) {
 
         for (item in collection) {
             if (item.rank != null) {
@@ -129,7 +127,8 @@ class BggUserCollectionViewModel(database: AppDatabase) : BggViewModel(database)
     }
 
     private suspend fun updateRemainingRanking(
-        collection: List<BggBoardGameCollectionItem>, datetime: LocalDateTime) {
+        collection: List<BggBoardGameCollectionItem>, datetime: LocalDateTime
+    ) {
 
         val collectionIds = collection.map { it.id }
         val remainingIds = database.boardGameDao().getBggIdsExcept(collectionIds)
